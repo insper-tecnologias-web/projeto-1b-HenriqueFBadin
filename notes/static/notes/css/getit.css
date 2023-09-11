@@ -1,0 +1,261 @@
+html,
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.btn {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+
+  overflow: visible;
+
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #2c2c2c;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 0.2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+
+  background-color: #f7d736;
+
+  transition: background-color 0.3s;
+}
+
+.btn > * {
+  position: relative;
+}
+
+.btn:before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 0;
+  padding-top: 0;
+
+  border-radius: 100%;
+
+  background-color: rgba(236, 240, 241, 0.3);
+
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.btn:active:before {
+  width: 120%;
+  padding-top: 120%;
+  outline: None;
+  display: flex;
+  justify-content: center;
+  transition: width 0.2s ease-out, padding-top 0.2s ease-out;
+}
+
+.logo {
+  width: 7%;
+  height: auto;
+  display: flex;
+  margin: 0.5% 0.5% 0.5% 0;
+}
+
+.appbar {
+  background-color: #f7d736;
+  display: flex;
+  box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0px rgba(0, 0, 0, 0.19);
+  flex-direction: row;
+  margin-top: 0.2%;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px 10px 10px 10px;
+  max-width: 33rem;
+  width: 40%;
+  padding: 0.8rem;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.card-container {
+  display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 90%;
+    flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  width: min-content;
+  min-width: 10rem;
+  height: min-content;
+  min-height: 6rem;
+  border-radius: 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  justify-content: space-around;
+  transition: transform 0.3s ease;
+}
+
+.card-title {
+  display: flex;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #2c2c2c;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.card-content {
+  display: flex;
+  font-size: 1rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #4c4c4c;
+  font-family: 'Permanent Marker', cursive;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  word-break: break-word;
+}
+
+.form-card-title {
+  display: flex;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #2c2c2c;
+  outline: none;
+  border: 0px;
+}
+
+.autoresize {
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  color: #2c2c2c;
+  outline: none;
+  border: 0px;
+  resize: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card-color-1{
+  background-color:#ead3a7;
+}
+.card-color-2{
+  background-color: #9de0f5;
+}
+.card-color-3{
+  background-color: #ef89ba;
+}
+.card-color-4{
+  background-color: #fae890;
+}
+.card-color-5{
+  background-color: #abe9c1;
+}
+.card-rotation-1{
+  transform: rotate(2deg);
+}
+.card-rotation-2{
+  transform: rotate(-2deg);
+}
+
+.card-rotation-3{
+  transform: rotate(-3deg);
+}
+
+.card-rotation-4{
+  transform: rotate(4deg);
+}
+
+.card-rotation-5{
+  transform: rotate(-4deg);
+}
+
+.card-rotation-6{
+  transform: rotate(1deg);
+}
+
+.card-rotation-7{
+  transform: rotate(-1deg);
+}
+
+.card-rotation-8{
+  transform: rotate(2.5deg);
+}
+
+.card-rotation-9{
+  transform: rotate(-2.5deg);
+}
+
+.card-rotation-10{
+  transform: rotate(3.5deg);
+}
+.card-rotation-11{
+  transform: rotate(-3.5deg);
+}
+
+.first-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.5rem;
+  height: 1rem;
+  margin: 0.5rem;
+  border: none;
+  background: none;
+}
+
+.cancel-btn {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  overflow: visible;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #2c2c2c;
+  border-width: 0;
+  outline: none;
+  border-radius: 0.2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  background-color: #f7d736;
+  transition: background-color 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.imagem-edit {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.5rem;
+}
