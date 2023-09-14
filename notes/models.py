@@ -9,3 +9,10 @@ class Note(models.Model):
         titulo = self.title
         id = self.id
         return f'{id}.{titulo}'
+
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
+    notes = models.ManyToManyField(Note)
+
+    def __str__(self):
+        return self.name

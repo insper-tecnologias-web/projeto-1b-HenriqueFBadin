@@ -1,14 +1,30 @@
 from django.shortcuts import render, redirect
-from .models import Note
+from .models import Note, Tag
 
 
 def index(request):
     if request.method == 'POST':
         title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
+        tag = request.POST.get('tagler')
+        tags = tag.split(' ')
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
         n = Note(title=title, content=content)
         n.save()
+        for t in tags:
+            tag_list = Tag.objects.all()
+            tem = False
+            for tag in tag_list:
+                if(t == tag.name):
+                    tag.notes.add(n)
+                    tem = True
+                    break
+            if tem == True:
+                break
+            tag = Tag(name = t)
+            tag.save()
+            tag.notes.add(n)
+        tag_list = Tag.objects.all()
         return redirect('index')
     else:
         all_notes = Note.objects.all()
@@ -44,3 +60,12 @@ def edit(request, index):
     else:
         note = Note.objects.get(id=index)
         return render(request, 'notes/edit.html', {'note': note})
+
+def tags(request):
+    if request.method == 'GET':
+        all_tags = Tag.objects.all()
+        return render(request, 'notes/tags.html', {'tags': all_tags})
+
+def note_list(request, index):
+    tag = Tag.objects.get(id=index)
+    return render(request, 'notes/note_list.html', {'notes': tag.notes.all()})

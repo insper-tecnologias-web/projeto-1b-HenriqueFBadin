@@ -1,0 +1,28 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="appbar">
+  <div style="display: flex; flex-direction: row;">
+    <img src="{% static 'notes/img/logo-getit.png' %}" class="logo"/>
+    <p class="subtitle">Como o Post-it, mas com outro verbo</p>
+  </div>
+  <a href="/tags"><img src="{% static 'notes/img/tag.png' %}" style="width: 2rem; height: 2rem; padding: 1rem;"/></a>
+</div>
+
+<main class="container">
+
+<ul class="card-container">
+  {% for tag in tags %}
+  <div class="card">
+    <div class="first-row">
+      <a href="/note-list/{{ tag.id }}" class="card-title" style="text-decoration: none;">{{ tag.name }}</a>
+    </div>
+  </div>
+  {% endfor %}
+</ul>
+
+</main>
+
+{% endblock %}
