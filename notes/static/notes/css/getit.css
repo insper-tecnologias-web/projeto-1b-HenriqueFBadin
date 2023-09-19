@@ -261,8 +261,16 @@ body {
   margin: 0.5rem;
 }
 
-.tag-image{
-  width: 2rem;
-  height: 2rem;
-  margin: 0.5rem;
+.tag-content{
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #4c4c4c;
+  font-family: 'Permanent Marker', cursive;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  word-break: break-word;
 }

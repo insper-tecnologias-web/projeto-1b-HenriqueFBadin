@@ -36,6 +36,16 @@
                 value="{{ note.title }}"
             />
             <textarea class="autoresize" name="detalhes">{{ note.content }}</textarea>
+
+            {% if note.tag_set.all.count == 0 %}
+                <p>Tags: </p>
+                <textarea class="autoresize" name="tags"></textarea>
+            {% else %}
+                <p>Tags: </p>
+                {% for tag in note.tag_set.all %}
+                    <textarea class="autoresize" name="tags">{{ forloop.counter }}->{{ tag.name }}</textarea>
+                {% endfor %}
+            {% endif %}
             <button class="btn" type="submit">Salvar</button>
             <a class="cancel-btn" href="/">Cancelar</a>
         </form>

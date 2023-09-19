@@ -36,10 +36,41 @@ def delete(request, index):
 
 def edit(request, index):
     if request.method == 'POST':
+        n = Note.objects.get(id=index)
         title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
+        tag = request.POST.get('tags')
+        print('*****{}*****'.format(tag))
+        if ('\n' in tag):
+            tags = tag.split('\n')
+            for t in tags:
+                tagIndex, newTag = t.split('->')
+                i=0
+                if n.tag_set.all().count() == 0 and newTag != '':
+                    tag = Tag(name = newTag)
+                    tag.save()
+                    tag.notes.add(n)
+                else:
+                    for tag in n.tag_set.all():
+                        existing_tag = Tag.objects.filter(name=newTag).first()
+                        i+=1
+                        if i == int(tagIndex):
+                            print('index Igual')
+                            if newTag == '':
+                                print('entrou aqui', tag)
+                                tag.delete()
+                                tag.save()
+                            else:
+                                tag.name = newTag
+                                tag.save()
+                        elif not existing_tag:
+                            tag = Tag(name = newTag)
+                            tag.save()
+                            tag.notes.add(n)
+
+        else:
+            tagIndex, newTag = tag.split('->')
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
-        n = Note.objects.get(id=index)
         if(title == '' and content == ''):
             print('entrou aqui all')
             n.title = n.title
@@ -55,6 +86,21 @@ def edit(request, index):
         else:
             n.title = title
             n.content = content
+        
+        i=0
+        for tag in n.tag_set.all():
+            i+=1
+            if i == int(tagIndex):
+                if newTag == '':
+                    tag.delete()
+                else:
+                    tag.name = newTag
+                    tag.save()
+        if n.tag_set.all().count() == 0 and newTag != '':
+            tag = Tag(name = newTag)
+            tag.save()
+            tag.notes.add(n)
+
         n.save()
         return redirect('index')
     else:
