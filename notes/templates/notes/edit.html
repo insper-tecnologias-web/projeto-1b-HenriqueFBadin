@@ -42,9 +42,7 @@
                 <textarea class="autoresize" name="tags"></textarea>
             {% else %}
                 <p>Tags: </p>
-                {% for tag in note.tag_set.all %}
-                    <textarea class="autoresize" name="tags">{{ forloop.counter }}->{{ tag.name }}</textarea>
-                {% endfor %}
+                <textarea class="autoresize" name="tags">{% for tag in note.tag_set.all %}{{ tag.name }} {% endfor %}</textarea>
             {% endif %}
             <button class="btn" type="submit">Salvar</button>
             <a class="cancel-btn" href="/">Cancelar</a>

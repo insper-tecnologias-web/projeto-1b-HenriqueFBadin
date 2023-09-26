@@ -8,23 +8,32 @@ def index(request):
         content = request.POST.get('detalhes')
         tag = request.POST.get('tagler')
         tags = tag.split(' ')
+        print(tags)
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
         n = Note(title=title, content=content)
         n.save()
         for t in tags:
+            print(f"****{t}****")
             tag_list = Tag.objects.all()
-            tem = False
-            for tag in tag_list:
-                if(t == tag.name):
+            if tag_list.count() != 0:
+                existe = False
+                for tag in tag_list:
+                    if(t == tag.name):
+                        print(f'{t} == {tag.name}, {n}')
+                        tag.notes.add(n)
+                        existe = True
+                        break
+                if not existe:
+                    print(f'{t} != all tag names')
+                    tag = Tag(name = t)
+                    tag.save()
                     tag.notes.add(n)
-                    tem = True
-                    break
-            if tem == True:
-                break
-            tag = Tag(name = t)
-            tag.save()
-            tag.notes.add(n)
-        tag_list = Tag.objects.all()
+            else:
+                print(f'nota: {n}')
+                tag = Tag(name = t)
+                tag.save()
+                tag.notes.add(n)
+        n.save()
         return redirect('index')
     else:
         all_notes = Note.objects.all()
@@ -32,6 +41,10 @@ def index(request):
 
 def delete(request, index):
     Note.objects.get(id=index).delete()
+    tag_list = Tag.objects.all()
+    for tag in tag_list:
+            if(tag.notes.count() == 0):
+                tag.delete()
     return redirect('index')
 
 def edit(request, index):
@@ -40,36 +53,33 @@ def edit(request, index):
         title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
         tag = request.POST.get('tags')
-        print('*****{}*****'.format(tag))
-        if ('\n' in tag):
-            tags = tag.split('\n')
-            for t in tags:
-                tagIndex, newTag = t.split('->')
-                i=0
-                if n.tag_set.all().count() == 0 and newTag != '':
-                    tag = Tag(name = newTag)
+        tags = tag.split(' ')
+        tag_list = Tag.objects.all()
+        for tag_in in n.tag_set.all():
+            tag_in.notes.remove(n)
+        for t in tags:
+            print(f"****{t}****")
+            if tag_list.count() != 0:
+                existe = False
+                for tag in tag_list:
+                    if(t == tag.name):
+                        print(f'{t} == {tag.name}')
+                        tag.notes.add(n)
+                        existe = True
+                        break
+                if not existe:
+                    print(f'{t} != all tag names')
+                    tag = Tag(name = t)
                     tag.save()
                     tag.notes.add(n)
-                else:
-                    for tag in n.tag_set.all():
-                        existing_tag = Tag.objects.filter(name=newTag).first()
-                        i+=1
-                        if i == int(tagIndex):
-                            print('index Igual')
-                            if newTag == '':
-                                print('entrou aqui', tag)
-                                tag.delete()
-                                tag.save()
-                            else:
-                                tag.name = newTag
-                                tag.save()
-                        elif not existing_tag:
-                            tag = Tag(name = newTag)
-                            tag.save()
-                            tag.notes.add(n)
-
-        else:
-            tagIndex, newTag = tag.split('->')
+            else:
+                print(f'nota: {n}')
+                tag = Tag(name = t)
+                tag.save()
+                tag.notes.add(n)
+        for tag in tag_list:
+            if(tag.notes.count() == 0):
+                tag.delete()
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
         if(title == '' and content == ''):
             print('entrou aqui all')
@@ -86,20 +96,6 @@ def edit(request, index):
         else:
             n.title = title
             n.content = content
-        
-        i=0
-        for tag in n.tag_set.all():
-            i+=1
-            if i == int(tagIndex):
-                if newTag == '':
-                    tag.delete()
-                else:
-                    tag.name = newTag
-                    tag.save()
-        if n.tag_set.all().count() == 0 and newTag != '':
-            tag = Tag(name = newTag)
-            tag.save()
-            tag.notes.add(n)
 
         n.save()
         return redirect('index')
