@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'getit.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:xavGSfuZkurouAaQx5ev@containers-us-west-171.railway.app:6094/railway',
+        default='postgresql://postgres:OJhqpQK2cgVz2a7Gh9yM@containers-us-west-192.railway.app:6899/railway',
         conn_max_age=600,
         ssl_require=not DEBUG
     )
