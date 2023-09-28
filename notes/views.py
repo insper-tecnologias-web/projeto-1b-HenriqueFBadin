@@ -13,6 +13,8 @@ def index(request):
         n = Note(title=title, content=content)
         n.save()
         for t in tags:
+            if t == ' ':
+                break
             print(f"****{t}****")
             tag_list = Tag.objects.all()
             if tag_list.count() != 0:
