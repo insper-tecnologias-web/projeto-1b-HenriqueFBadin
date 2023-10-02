@@ -4,15 +4,16 @@ from .models import Note, Tag
 
 def index(request):
     if request.method == 'POST':
-        title = request.POST.get('titulo')
+        print("*********************POST*********************")
+        #title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
-        tag = request.POST.get('tagler')
-        tags = tag.split(' ')
+        #tag = request.POST.get('tagler')
+        #tags = tag.split(' ')
         print(tags)
         # TAREFA: Utilize o title e content para criar um novo Note no banco de dados
-        n = Note(title=title, content=content)
+        n = Note(title="memoria", content=content)
         n.save()
-        for t in tags:
+        '''for t in tags:
             if t == ' ':
                 break
             print(f"****{t}****")
@@ -34,7 +35,7 @@ def index(request):
                 print(f'nota: {n}')
                 tag = Tag(name = t)
                 tag.save()
-                tag.notes.add(n)
+                tag.notes.add(n)'''
         n.save()
         return redirect('index')
     else:
